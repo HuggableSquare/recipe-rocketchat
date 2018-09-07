@@ -31,6 +31,11 @@ const getTeamIcon = function getTeamIcon() {
   xmlhttp.send();
 };
 
+const getSidebarColor = function getSidebarColor() {
+  const color = window.getComputedStyle(document.body, null).getPropertyValue('background');
+  ipcRenderer.sendToHost('sidebarColor', color);
+};
+
 module.exports = (Franz) => {
   const getMessages = function getMessages() {
     const directMessages = Math.round(document.querySelectorAll('.unread.unread-mention, .badge--unread').length / 2);
@@ -43,4 +48,6 @@ module.exports = (Franz) => {
   setTimeout(() => {
     getTeamIcon();
   }, 4000);
+
+  getSidebarColor();
 };
